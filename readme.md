@@ -1,4 +1,4 @@
-# Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-projects/spring-petclinic.png?branch=master)](https://travis-ci.org/spring-projects/spring-petclinic/)
+# Containerized Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-projects/spring-petclinic.png?branch=master)](https://travis-ci.org/spring-projects/spring-petclinic/)
 Deploy this sample application to Pivotal Web Services:
 
 <a href="https://push-to.cfapps.io?repo=https%3A%2F%2Fgithub.com%2Fspring-projects%2Fspring-petclinic.git">
@@ -18,8 +18,15 @@ cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
 ```
+You can then access petclinic here: http://localhost:8080/
+
+
+## Running petclinic in Docker containers
+
+After cloning the repository, use the Ansible playbook to Build, Dockerize, and deploy the application.
 
 You can then access petclinic here: http://localhost:8080/
+
 
 <img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
 
