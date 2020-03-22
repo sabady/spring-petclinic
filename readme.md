@@ -21,7 +21,7 @@ java -jar target/*.jar
 You can then access petclinic here: http://localhost:8080/
 
 
-## Running petclinic in Docker containers
+## Running petclinic in Docker container
 
 After cloning the repository, use the Ansible playbook to Build, Dockerize, and deploy the application.
 
