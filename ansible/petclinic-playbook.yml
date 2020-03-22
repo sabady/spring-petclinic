@@ -1,0 +1,35 @@
+# Assume git repository already cloned
+---
+- hosts: petclinic-hosts
+  vars: 
+    repo_root: $HOME/repos/spring-petclinic
+	target_path: $HOME/repos/spring-petclinic/target
+	docker_file_path: $HOME/repos/spring-petclinic/Dockerfile
+  tasks:
+  - name: build jar file
+    docker_container:
+	  name: build_jar_file
+	  detach: no
+	  auto_remove: yes
+	  image: maven:3.3-jdk-8
+	  state: started
+	  command: mvn clean install
+	  volumes:
+	  - "{{ repo_root }}":/usr/src/mymaven
+	  working_dir: /usr/src/mymaven
+  - name: copy jar to dockerfile folder
+    copy:
+	  src: "{{ target_path }}"/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+	  dest: "{{ docker_file_path }}"
+  - name: create docker image
+    docker_image:
+	  build:
+	    path: "{{ docker_file_path }}"
+		name: petclinic:latest
+		source: pull
+  - name: run petclinic docker container
+    docker_container:
+	  name: petclinic-app
+	  detach: no
+	  restart_policy: unless_stopped
+	  published_ports: 8080:8080
